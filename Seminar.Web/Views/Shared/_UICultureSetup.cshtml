@@ -1,0 +1,60 @@
+﻿@{
+    var culture = System.Threading.Thread.CurrentThread.CurrentCulture;
+    var cultureCode = culture.TwoLetterISOLanguageName;
+    var jsDatePattern = culture.DateTimeFormat.ShortDatePattern.ToUpper();
+}
+
+<script type="text/javascript">
+    $(function() {
+        $('.date-picker').datetimepicker({
+            locale: '@cultureCode',
+            format: '@jsDatePattern'
+        });
+    });
+</script>
+
+
+<script type="text/javascript">
+    $.validator.methods.date = function (value, element) {
+        if (this.optional(element) && (value == '' || value == undefined || value == null))
+            return true;
+
+        var shortDatePattern = '@jsDatePattern';
+
+        return moment(value, shortDatePattern).isValid();
+    }
+    $.when(
+    $.get("/scripts/cldr/data/@cultureCode/numbers.json"),
+    $.get("/scripts/cldr/data/likelySubtags.json"),
+    $.get("/scripts/cldr/data/numberingSystems.json")
+    ).then(function () {
+        // Normalize $.get results, we only need the JSON, not the request statuses.
+        return [].slice.apply(arguments, [0]).map(function (result) {
+            return result[0];
+        });
+    }).then(Globalize.load).then(function () {
+        var globalizeNumberParser = Globalize('@cultureCode').numberParser();
+
+        $.validator.methods.number = function (value, element) {
+            if (this.optional(element))
+                return true;
+
+            if (!isNaN(globalizeNumberParser(value)))
+                return true;
+
+            return false;
+        }
+
+        $.validator.methods.range = function (value, element, param) {
+            if (this.optional(element))
+                return true;
+
+            var val = globalizeNumberParser(value);
+
+            return val >= param[0] && val <= param[1];
+        }
+
+    });
+
+</script>
+

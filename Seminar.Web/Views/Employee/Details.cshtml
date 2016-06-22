@@ -1,0 +1,30 @@
+﻿@model Seminar.Model.Employee
+@{
+    ViewBag.Title = "Detalji o radniku";
+}
+<h2>@ViewBag.Title</h2>
+
+@if (Model == null)
+{
+    <div class="text-danger">
+        <p>Ovaj radnik ne postoji</p>
+    </div>
+}
+else
+{
+    <table class="table table-hover table-condensed">
+        <tr>
+            <th>Ime</th>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <th>OIB</th>
+            <td>@Model.OIB</td>
+        </tr>
+        <tr>
+            <th>Tvrtka</th>
+            <td>@Model.Company.Name</td>
+        </tr>
+    </table>
+    @Html.ActionLink("Uredi", "Edit", new {id = @Model.ID})
+}

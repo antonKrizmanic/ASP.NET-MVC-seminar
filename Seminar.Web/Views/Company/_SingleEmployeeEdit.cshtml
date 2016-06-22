@@ -1,0 +1,23 @@
+﻿@model Seminar.DAL.DTO.EmployeeDTO
+@using (Html.BeginCollectionItem("Employers"))
+{
+    <div class="form-horizontal single-employee">
+        @Html.HiddenFor(model=>model.ID)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.OIB, new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OIB, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.OIB, "", new {@class = "text-danger"})
+            </div>
+        </div>
+        <a href="javascript:void(0);" class="btn btn-danger" onclick="deleteEmployee(this, @Model.ID)">Delete</a>
+    </div>
+
+}

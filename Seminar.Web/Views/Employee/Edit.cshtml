@@ -1,0 +1,16 @@
+﻿@model Seminar.Model.Employee
+@{
+    ViewBag.Title = "Uređivanje radnika";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    <text>
+        @Html.Partial("_CreateOrEdit")
+    </text>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

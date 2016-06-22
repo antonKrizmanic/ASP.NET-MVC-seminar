@@ -1,0 +1,58 @@
+﻿@model Seminar.Model.TravelWarrant
+@{
+    ViewBag.Title = "Dodavanje naloga";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    <text>
+        @Html.Partial("_CreateOrEdit")
+    </text>
+}
+
+
+@section scripts
+{
+@Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(".company").change(function() {
+            var id = $(this).val();
+            $.ajax({
+                url: '@Url.Action("SelectAjaxCar")',
+                method: "POST",
+                data: { 'id': id },
+                success: function(data) {
+                    $(".car option").each(function() {
+                        $(this).remove();
+                    });
+                    for (var i = 0; i < data.length; i++) {
+                        $('.car').append($('<option>', {
+                            value: data[i].Value,
+                            text: data[i].Text
+                        }));
+                    }
+                }
+            });
+            $.ajax({
+                url: '@Url.Action("SelectAjaxEmployer")',
+                method: "POST",
+                data: { 'id': id },
+                success: function(data) {
+                    $(".employee option").each(function() {
+                        $(this).remove();
+                    });
+                    for (var i = 0; i < data.length; i++) {
+                        $('.employee').append($('<option>', {
+                            value: data[i].Value,
+                            text: data[i].Text
+                        }));
+                    }
+                }
+            });
+        });
+    </script>
+    
+}
+

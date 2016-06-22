@@ -1,0 +1,54 @@
+﻿@model List<Seminar.Model.Car>
+    
+@{
+    ViewBag.Title = "Automobili";
+}
+
+<h2>@ViewBag.Title</h2>
+@Html.ActionLink("Dodaj","Create","Car",new {@class="btn btn-primary"})
+<table id="tbl-companies" class="table table-condensed table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Model</th>
+            <th>Potrosnja</th>
+            <th>Godiste</th>
+            <th>Tvrtka</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var car in Model)
+    {
+        <tr>
+            <td>@car.ID</td>
+            <td>@Html.ActionLink(car.Name, "Details", new {id = car.ID})</td>
+            <td>@car.FuelConsumption</td>
+            <td>@car.Year</td>
+            <td>@car.Company.Name</td>
+            <td>@Html.ActionLink("Uredi", "Edit", new {id = car.ID})
+                <a href="javascript:void(0);" onclick="deleteCar(this, @car.ID)">Obrisi</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+
+</table>
+
+@section scripts{
+    <script type="text/javascript">
+        function deleteCar(link, id) {
+            $.ajax({
+                url: '@Url.Action("Delete")',
+                data: { id: id },
+                success: function (data) {
+                    if (data == "OK") {
+                        $(link).closest('tr').remove();
+                    } else if(data=="False"){
+                        alert("Prvo obrisati naloge u kojima se pojavljuje ovaj auto!");
+                    }
+                }
+            });
+        }
+    </script>
+}

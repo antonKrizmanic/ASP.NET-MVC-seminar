@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{08AC9789-AD47-4200-BA05-00FD33A91537}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Seminar.DAL</RootNamespace>
+    <AssemblyName>Seminar.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DTO\CarDTO.cs" />
+    <Compile Include="DTO\CompanyDTO.cs" />
+    <Compile Include="DTO\EmployeeDTO.cs" />
+    <Compile Include="DTO\TravelWarrantDTO.cs" />
+    <Compile Include="Migrations\201606020612223_Initial.cs" />
+    <Compile Include="Migrations\201606020612223_Initial.Designer.cs">
+      <DependentUpon>201606020612223_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606032205429_tezina.cs" />
+    <Compile Include="Migrations\201606032205429_tezina.Designer.cs">
+      <DependentUpon>201606032205429_tezina.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606032234454_tezina1.cs" />
+    <Compile Include="Migrations\201606032234454_tezina1.Designer.cs">
+      <DependentUpon>201606032234454_tezina1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606041631025_Car.cs" />
+    <Compile Include="Migrations\201606041631025_Car.Designer.cs">
+      <DependentUpon>201606041631025_Car.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606071104447_Kilometraza.cs" />
+    <Compile Include="Migrations\201606071104447_Kilometraza.Designer.cs">
+      <DependentUpon>201606071104447_Kilometraza.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606071129029_Kilometraza1.cs" />
+    <Compile Include="Migrations\201606071129029_Kilometraza1.Designer.cs">
+      <DependentUpon>201606071129029_Kilometraza1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606200826434_OibOpis.cs" />
+    <Compile Include="Migrations\201606200826434_OibOpis.Designer.cs">
+      <DependentUpon>201606200826434_OibOpis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606201600009_Grad.cs" />
+    <Compile Include="Migrations\201606201600009_Grad.Designer.cs">
+      <DependentUpon>201606201600009_Grad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\CarRepository.cs" />
+    <Compile Include="Repository\CompanyRepository.cs" />
+    <Compile Include="Repository\EmployeeRepository.cs" />
+    <Compile Include="Repository\RepositoryBase.cs" />
+    <Compile Include="Repository\TravelWarrantRepository.cs" />
+    <Compile Include="TravelWarrantManagerDbContext.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Seminar.Model\Seminar.Model.csproj">
+      <Project>{2057c585-970d-4b45-879f-9c6e9883fcd5}</Project>
+      <Name>Seminar.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201606020612223_Initial.resx">
+      <DependentUpon>201606020612223_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606032205429_tezina.resx">
+      <DependentUpon>201606032205429_tezina.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606032234454_tezina1.resx">
+      <DependentUpon>201606032234454_tezina1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606041631025_Car.resx">
+      <DependentUpon>201606041631025_Car.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606071104447_Kilometraza.resx">
+      <DependentUpon>201606071104447_Kilometraza.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606071129029_Kilometraza1.resx">
+      <DependentUpon>201606071129029_Kilometraza1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606200826434_OibOpis.resx">
+      <DependentUpon>201606200826434_OibOpis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606201600009_Grad.resx">
+      <DependentUpon>201606201600009_Grad.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

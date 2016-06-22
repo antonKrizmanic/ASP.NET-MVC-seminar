@@ -1,0 +1,49 @@
+﻿@model Seminar.DAL.DTO.CompanyDTO
+@{
+    ViewBag.Title = "Dodavanje tvrtke";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using(Html.BeginForm()){
+    <text>
+        @Html.Partial("_CreateOrEdit")
+    </text>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+        function deleteCar(link) {
+            $(link).closest('.single-car').remove();
+        }
+        function deleteEmployee(link) {
+            $(link).closest('.single-employee').remove();
+        }
+        function addCar() {
+            $.ajax({
+                url: '@Url.Action("AddNewCar")',
+                success: function (data) {
+                    if ($(".single-car")[0]) {
+                        $(".single-car:last").after(data);
+                    } else {
+                        $(".cars").after(data);
+                    }
+
+                }
+            });
+        }
+        function addEmployee() {
+            $.ajax({
+                url: '@Url.Action("AddNewEmployee")',
+                success: function (data) {
+                    if ($(".single-employee")[0]) {
+                        $(".single-employee:last").after(data);
+                    } else {
+                        $(".employees").after(data);
+                    }
+
+                }
+            });
+        }
+</script>
+}

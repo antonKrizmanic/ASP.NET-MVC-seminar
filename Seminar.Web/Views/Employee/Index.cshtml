@@ -1,0 +1,54 @@
+﻿@model List<Seminar.Model.Employee>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Zaposlenici</h2>
+@Html.ActionLink("Dodaj", "Create", "Company", new { @class = "btn btn-primary" })
+<table id="tbl-companies" class="table table-condensed table-hover">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Ime</th>
+        <th>OIB</th>
+        <th>Tvrtka</th>
+        <th>Akcija</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var employee in Model)
+    {
+        <tr>
+            <td>@employee.ID</td>
+            <td>@Html.ActionLink(employee.Name, "Details", new {id = employee.ID})</td>
+            <td>@employee.OIB</td>
+            <td>@employee.Company.Name</td>
+            <td>@Html.ActionLink("Uredi", "Edit", new {id = employee.ID})
+                <a href="javascript:void(0);" onclick="deleteEmployee(this, @employee.ID)">Obriši</a>
+            </td>
+        </tr>
+    }
+
+    </tbody>
+</table>
+
+
+@section scripts{
+    <script type="text/javascript">
+        function deleteEmployee(link, id) {
+            $.ajax({
+                url: '@Url.Action("Delete")',
+                data: { id: id },
+                success: function(data) {
+                    if (data == "OK") {
+                        $(link).closest('tr').remove();
+                    } else if (data == "False") {
+                        alert("Prvo obrisite naloge u kojima se pojavljuje ovaj radnik!");
+                    }
+                }
+
+            });
+        }
+    </script>
+}

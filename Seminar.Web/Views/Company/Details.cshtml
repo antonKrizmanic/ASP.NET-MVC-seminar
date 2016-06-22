@@ -1,0 +1,140 @@
+﻿@using Seminar.Model
+@model Seminar.DAL.DTO.CompanyDTO
+@{
+    ViewBag.Title = "Detalji o tvrtki";
+}
+<h2>@ViewBag.Title</h2>
+
+@if (Model == null)
+{
+    <div class="text-danger">
+        <p>Ova tvrtka ne postoji</p>
+    </div>
+}
+else
+{
+    <table class="table table-hover table-condensed">
+        <tr>
+            <th>Tvrtka</th>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <th>OIB</th>
+            <td>@Model.OIB</td>
+        </tr>
+        <tr>
+            <th>Adresa</th>
+            <td>@Model.Address</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>@Model.Email</td>
+        </tr>
+    </table>
+    @Html.ActionLink("Uredi", "Edit", new { id = @Model.ID })
+
+    <h3>Automobili</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table table-hover table-condensed">
+                <tr>
+                    <th>Ime</th>
+                    <th>Potrosnja</th>
+                </tr>
+                @foreach (var car in Model.Cars)
+                {
+                    <tr>
+                        <td>@car.Name</td>
+                        <td>@car.FuelConsumption</td>
+                    </tr>
+                }
+            </table>
+        </div>    
+    </div>
+
+    <div clas="row">
+        <div class="col-md-6">
+            <h3>Zaposlenici</h3>
+            <table class="table table-hover table-condensed">
+                <tr>
+                    <th>Ime</th>
+                    <th>Oib</th>
+                </tr>
+                @foreach (var employee in Model.Employers)
+                {
+                    <tr>
+                        <td>@employee.Name</td>
+                        <td>@employee.OIB</td>
+                    </tr>
+                }
+            </table>        
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Nalozi</h3>
+            @using (Html.BeginForm("CreatePdf","Company"))
+            {
+                @Html.HiddenFor(model => model.ID)
+                <div class="form-group">
+                    
+                    <div class="col-md-10">
+                        @Html.DropDownList("month", (IEnumerable<SelectListItem>)ViewBag.PossibleCompanies, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            }
+            
+            <a href="javascript:void(0);" onclick="createPdf(this, @Model.ID)">Stvori Pdf Mjesecni</a>
+            @Html.ActionLink("Stvori PDF", "CreatePdf", new {id=Model.ID})
+            <table class="table table-hover table-condensed">
+                <tr>
+                    <th>Relacija</th>
+                    <th>Vozilo</th>
+                    <th>Zaposlenik</th>
+                    <th>Svrha puta</th>
+                    <th>Početna kilometraža</th>
+                    <th>Završna kilometraža</th>
+                    <th>Prijeđeni kilometri</th>
+
+                </tr>
+                @foreach (var travelWarrant in Model.TravelWarrants)
+                {
+                    <tr>
+                        <td>@travelWarrant.Relation</td>
+                        <td>@travelWarrant.CarName</td>
+                        <td>@travelWarrant.EmployeeName</td>
+                        <td>@travelWarrant.Description</td>
+                        <td>@travelWarrant.StartKilometer km</td>
+                        <td>@travelWarrant.EndKilometer km</td>
+                        <td>@travelWarrant.Kilometer km</td>
+                    </tr>
+                }
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <th class="text-right">Ukupno:</th>
+                    <td>@Model.TotalKilometer km</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+}
+@section scripts{
+    <script type="text/javascript">
+        function createPdf(link, id) {
+            $.get({
+                url: '@Url.Action("CreatePdf")',
+                data: { id: id }
+            });
+        }
+    </script>
+}

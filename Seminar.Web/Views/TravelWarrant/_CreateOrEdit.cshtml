@@ -1,0 +1,71 @@
+﻿@model Seminar.Model.TravelWarrant
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+    <div class="form-group">
+        @Html.LabelFor(model => model.Relation, htmlAttributes: new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Relation, new {htmlAttributes = new {@class = "form-control"}})
+            @Html.ValidationMessageFor(model => model.Relation, "", new {@class = "text-danger"})
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.StartKilometer, htmlAttributes: new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.StartKilometer, new {htmlAttributes = new {@class = "form-control"}})
+            @Html.ValidationMessageFor(model => model.StartKilometer, "", new {@class = "text-danger"})
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.EndKilometer, htmlAttributes: new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.EndKilometer, new {htmlAttributes = new {@class = "form-control"}})
+            @Html.ValidationMessageFor(model => model.EndKilometer, "", new {@class = "text-danger"})
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Date, htmlAttributes: new {@class = "control-label col-md-2"})
+        <div class="col-md-3">
+            <div class="input-group date-picker">
+                @Html.TextBoxFor(model => model.Date, new {@class = "form-control"})
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>    
+            </div>
+            @Html.ValidationMessageFor(model => model.Date, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CompanyID, new {@class = "control-label col-md-2"})
+        <div class="col-md-2">
+            @Html.DropDownListFor(model => model.CompanyID, (IEnumerable<SelectListItem>) ViewBag.PossibleCompanies, new {@class = "form-control company"})
+            @Html.ValidationMessageFor(model => model.CompanyID, "", new {@class = "text-danger"})
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.CarID, new {@class = "control-label col-md-2"})
+        <div class="col-md-2">
+            @Html.DropDownListFor(model => model.CarID, (IEnumerable<SelectListItem>) ViewBag.PossibleCars, new {@class = "form-control car"})
+            @Html.ValidationMessageFor(model => model.CarID, "", new {@class = "text-danger"})
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.EmployeeID, new {@class = "control-label col-md-2"})
+        <div class="col-md-2">
+            @Html.DropDownListFor(model => model.EmployeeID, (IEnumerable<SelectListItem>) ViewBag.PossibleEmployees, new {@class = "form-control employee"})
+            @Html.ValidationMessageFor(model => model.EmployeeID, "", new {@class = "text-danger"})
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default"/>
+        </div>
+    </div>
+</div>
+

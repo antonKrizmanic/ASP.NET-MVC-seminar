@@ -1,0 +1,53 @@
+﻿@using Seminar.Model
+@model List<Seminar.Model.TravelWarrant>
+
+@{
+    ViewBag.Title = "Nalozi";
+}
+<h2>@ViewBag.Title</h2>
+
+@Html.ActionLink("Dodaj nalog","Create","TravelWarrant",new {@class="btn btn-primary"})
+<table class="table table-condensed table-hover">
+    <thead>
+    <tr>
+        <th>Relacija</th>
+        <th>Tvrtka</th>
+        <th>Zaposlenik</th>
+        <th>Vozilo</th>
+        <th>Datum</th>
+        <th>Akcija</th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var travelWarrant in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(travelWarrant.Relation, "Details", new { id = travelWarrant.ID })</td>
+                <td>@travelWarrant.Company.Name</td>
+                <td>@travelWarrant.Employee.Name</td>
+                <td>@travelWarrant.Car.Name</td>
+                <td>@travelWarrant.Date.ToShortDateString()</td>
+                <td>
+                    @Html.ActionLink("Uredi", "Edit", new { id = travelWarrant.ID })
+                <a href="javascript:void(0);" onclick="deleteWarrant(this, @travelWarrant.ID)">Obriši</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts{
+    <script type="text/javascript">
+        function deleteWarrant(link, id) {
+            $.ajax({
+                url: '@Url.Action("Delete")',
+                data: { id: id },
+                success: function (data) {
+                    if (data == "OK") {
+                        $(link).closest('tr').remove();
+                    }
+                }
+            });
+        }
+    </script>
+}

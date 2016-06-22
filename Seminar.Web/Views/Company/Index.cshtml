@@ -1,0 +1,50 @@
+﻿@model List<Seminar.Model.Company>
+@{
+    ViewBag.Title = "Tvrtke";
+}
+
+<h2>@ViewBag.Title</h2>
+@Html.ActionLink("Dodaj","Create","Company",new {@class="btn btn-primary"})
+<table id="tbl-companies" class="table table-condensed table-hover">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Naziv</th>
+        <th>Adresa</th>
+        <th>Email</th>
+        <th>Akcija</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var company in Model)
+    {
+        <tr>
+            <td>@company.ID</td>
+            <td>@Html.ActionLink(company.Name, "Details", new {id = company.ID})</td>
+            <td>@company.Address</td>
+            <td>@company.Email</td>
+            <td>@Html.ActionLink("Uredi", "Edit", new {id = company.ID})
+                <a href="javascript:void(0);"onclick="deleteCompany(this, @company.ID)">Obrisi</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@section scripts{
+    <script type="text/javascript">
+        function deleteCompany(link, id) {
+            $.ajax({
+                url: '@Url.Action("Delete")',
+                data: { id: id },
+                success: function (data) {
+                    if (data == "OK") {
+                        $(link).closest('tr').remove();
+                    } else if (data == "False") {
+                        alert("Prvo obrisite sve naloge!");
+                    }
+                }
+            });
+        }
+    </script>
+}
